@@ -101,7 +101,7 @@ export default function BudgetPage() {
 
       <div className="p-6 space-y-6">
         {/* Summary */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="card">
             <p className="text-sm text-gray-500">{t.budget.totalBudget}</p>
             <p className="text-2xl font-bold text-gray-900">{formatCurrency(totalLimit)}</p>
@@ -150,7 +150,7 @@ export default function BudgetPage() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {budgets.map((budget) => {
               const cat = CATEGORIES.find((c) => c.value === budget.category)!
               const pct = (budget.spent || 0) / budget.limit_amount * 100

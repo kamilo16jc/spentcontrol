@@ -107,7 +107,7 @@ export default function DashboardPage() {
       <Header title="Dashboard" />
       <div className="p-6 space-y-6">
         {/* Stat Cards */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <StatCard title={t.dashboard.monthIncome} amount={income} icon={TrendingUp} color="green" />
           <StatCard title={t.dashboard.monthExpenses} amount={expenses} icon={TrendingDown} color="red" />
           <StatCard title={t.dashboard.balance} amount={income - expenses} icon={Wallet} color="blue" />
@@ -115,8 +115,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Charts Row */}
-        <div className="grid grid-cols-3 gap-4">
-          <div className="card col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="card md:col-span-2">
             <h2 className="text-base font-semibold text-gray-900 mb-4">{t.dashboard.incomeVsExpenses}</h2>
             {loading ? (
               <div className="h-[250px] flex items-center justify-center text-gray-400 text-sm">{t.dashboard.loading}</div>
@@ -167,8 +167,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Bottom Row */}
-        <div className="grid grid-cols-3 gap-4">
-          <div className="card col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="card md:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-semibold text-gray-900">{t.dashboard.recentTransactions}</h2>
               <Link href="/transactions" className="text-sm font-semibold" style={{ color: '#ff6b35' }}>{t.dashboard.viewAll}</Link>

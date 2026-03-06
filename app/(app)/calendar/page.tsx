@@ -109,7 +109,7 @@ export default function CalendarPage() {
       <Header title={t.calendar.title} />
       <div className="p-6 space-y-6">
         {/* Summary */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="card">
             <p className="text-sm text-gray-500">{t.calendar.totalMonthly}</p>
             <p className="text-2xl font-bold text-gray-900">{formatCurrency(totalMonthly)}</p>
@@ -164,7 +164,7 @@ export default function CalendarPage() {
             <button onClick={() => setShowModal(true)} className="mt-3 text-sm font-semibold" style={{ color: '#ff6b35' }}>{t.calendar.addFirst}</button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[...payments].sort((a, b) => a.day_of_month - b.day_of_month).map((pay) => {
               const cat = CATEGORIES.find((c) => c.value === pay.category)
               return (

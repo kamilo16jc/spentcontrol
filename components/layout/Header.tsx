@@ -57,7 +57,7 @@ export default function Header({ title }: { title: string }) {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="relative">
+        <div className="relative hidden md:block">
           <Search style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', width: '16px', height: '16px', color: '#aaa' }} />
           <input
             type="text"

@@ -97,7 +97,7 @@ export default function TransactionsPage() {
 
       <div className="p-6 space-y-6">
         {/* Summary */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="card flex items-center gap-4">
             <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
               <ArrowUpCircle className="w-5 h-5 text-green-600" />

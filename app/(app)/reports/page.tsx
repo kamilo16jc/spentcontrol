@@ -159,7 +159,7 @@ export default function ReportsPage() {
         </div>
 
         {/* KPIs */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="card" style={{ background: '#f0fdf4' }}>
             <p className="text-xs text-gray-500 font-medium">{t.reports.income}</p>
             <p className="text-xl font-bold mt-1 text-green-600">{loading ? '...' : formatCurrency(income)}</p>
@@ -179,7 +179,7 @@ export default function ReportsPage() {
         </div>
 
         {/* Charts */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="card">
             <h2 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <BarChart3 className="w-4 h-4" style={{ color: '#ff6b35' }} />

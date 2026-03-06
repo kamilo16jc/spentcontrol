@@ -92,7 +92,7 @@ export default function SavingsPage() {
       <Header title={t.savings.title} />
       <div className="p-6 space-y-6">
         {/* Summary */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="card">
             <p className="text-sm text-gray-500">{t.savings.totalGoal}</p>
             <p className="text-2xl font-bold text-gray-900">{formatCurrency(totalTarget)}</p>
@@ -122,7 +122,7 @@ export default function SavingsPage() {
             <button onClick={() => setShowModal(true)} className="mt-3 text-sm font-semibold" style={{ color: '#ff6b35' }}>{t.savings.createFirst}</button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {goals.map((goal) => {
               const pct = Math.min((goal.saved_amount / goal.target_amount) * 100, 100)
               const monthsLeft = getMonthsLeft(goal.target_date)

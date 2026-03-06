@@ -32,7 +32,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 flex flex-col z-10" style={{ background: 'white', borderRight: '1px solid #ede9e3' }}>
+    <aside className="fixed left-0 top-0 h-full w-64 hidden md:flex flex-col z-10" style={{ background: 'white', borderRight: '1px solid #ede9e3' }}>
       {/* Logo */}
       <div className="px-6 py-5" style={{ borderBottom: '1px solid #ede9e3' }}>
         <div className="flex items-center gap-2">
