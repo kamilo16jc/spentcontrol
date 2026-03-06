@@ -148,12 +148,12 @@ export default function ReportsPage() {
               document={<FinancialReportPDF data={reportData} />}
               fileName={`spentcontrol-${getMonthName(selectedMonth)}-${selectedYear}.pdf`}
             >
-              {({ loading: pdfL }: { loading: boolean }) => (
+              {(({ loading: pdfL }: { loading: boolean }) => (
                 <button className="btn-primary flex items-center gap-2 text-sm" disabled={pdfL || loading}>
                   <Download className="w-4 h-4" />
                   {pdfL ? t.reports.generatingPdf : t.reports.exportPdf}
                 </button>
-              )}
+              )) as any}
             </PDFDownloadLink>
           )}
         </div>
