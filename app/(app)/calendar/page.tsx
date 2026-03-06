@@ -107,7 +107,7 @@ export default function CalendarPage() {
   return (
     <div>
       <Header title={t.calendar.title} />
-      <div className="p-6 space-y-6">
+      <div className="p-4 md:p-6 space-y-4 md:space-y-6">
         {/* Summary */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="card">
@@ -135,7 +135,7 @@ export default function CalendarPage() {
             {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => {
               const dayPayments = payments.filter((p) => p.day_of_month === day)
               return (
-                <div key={day} className={cn('min-h-[60px] rounded-lg p-1 border text-xs', dayPayments.length > 0 ? 'border-orange-100 bg-orange-50' : 'border-gray-100 bg-white')}>
+                <div key={day} className={cn('min-h-[40px] sm:min-h-[60px] rounded-lg p-1 border text-xs', dayPayments.length > 0 ? 'border-orange-100 bg-orange-50' : 'border-gray-100 bg-white')}>
                   <span className="text-gray-500 font-medium">{day}</span>
                   {dayPayments.map((p) => (
                     <div key={p.id} className="mt-1 px-1 py-0.5 rounded text-white text-[10px] font-medium truncate" style={{ backgroundColor: p.color }}>
@@ -200,7 +200,7 @@ export default function CalendarPage() {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/40 flex items-end sm:items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl">
             <h2 className="text-lg font-bold mb-4" style={{ color: '#1a1a2e' }}>{t.calendar.newPayment}</h2>
             <form onSubmit={handleSubmit} className="space-y-4">

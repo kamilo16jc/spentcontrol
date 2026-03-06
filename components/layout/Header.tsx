@@ -50,13 +50,13 @@ export default function Header({ title }: { title: string }) {
   const initials = user?.name?.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || 'U'
 
   return (
-    <header className="px-6 py-4 flex items-center justify-between" style={{ background: 'white', borderBottom: '1px solid #ede9e3' }}>
+    <header className="px-4 md:px-6 py-3 md:py-4 flex items-center justify-between" style={{ background: 'white', borderBottom: '1px solid #ede9e3' }}>
       <div>
-        <h1 style={{ fontSize: '20px', fontWeight: 800, color: '#1a1a2e' }}>{title}</h1>
-        <p style={{ fontSize: '13px', color: '#aaa' }}>{today}</p>
+        <h1 style={{ fontSize: '18px', fontWeight: 800, color: '#1a1a2e' }}>{title}</h1>
+        <p className="hidden sm:block" style={{ fontSize: '13px', color: '#aaa' }}>{today}</p>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 md:gap-3">
         <div className="relative hidden md:block">
           <Search style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', width: '16px', height: '16px', color: '#aaa' }} />
           <input
@@ -102,11 +102,11 @@ export default function Header({ title }: { title: string }) {
             <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg, #ff6b35, #ffb347)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '13px', fontWeight: 700 }}>
               {user?.avatar ? <img src={user.avatar} alt="" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} /> : initials}
             </div>
-            <div style={{ textAlign: 'left' }}>
+            <div className="hidden md:block" style={{ textAlign: 'left' }}>
               <p style={{ fontSize: '12px', fontWeight: 700, color: '#1a1a2e', margin: 0, lineHeight: 1.2 }}>{user?.name || 'Usuario'}</p>
               <p style={{ fontSize: '10px', color: '#aaa', margin: 0 }}>{user?.email || ''}</p>
             </div>
-            <ChevronDown style={{ width: '14px', height: '14px', color: '#aaa', transform: showDropdown ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+            <ChevronDown className="hidden md:block" style={{ width: '14px', height: '14px', color: '#aaa', transform: showDropdown ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
           </button>
 
           {showDropdown && (

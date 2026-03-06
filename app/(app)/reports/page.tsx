@@ -127,16 +127,16 @@ export default function ReportsPage() {
   return (
     <div>
       <Header title={t.reports.title} />
-      <div className="p-6 space-y-6">
+      <div className="p-4 md:p-6 space-y-4 md:space-y-6">
         {/* Controls */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <select value={selectedMonth} onChange={(e) => setSelectedMonth(Number(e.target.value))} className="input w-40">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <select value={selectedMonth} onChange={(e) => setSelectedMonth(Number(e.target.value))} className="input w-36 md:w-40">
               {Array.from({ length: 12 }, (_, i) => (
                 <option key={i + 1} value={i + 1}>{getMonthName(i + 1)}</option>
               ))}
             </select>
-            <select value={selectedYear} onChange={(e) => setSelectedYear(Number(e.target.value))} className="input w-28">
+            <select value={selectedYear} onChange={(e) => setSelectedYear(Number(e.target.value))} className="input w-24 md:w-28">
               {[2024, 2025, 2026, 2027].map((y) => (
                 <option key={y} value={y}>{y}</option>
               ))}

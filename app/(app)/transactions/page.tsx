@@ -95,7 +95,7 @@ export default function TransactionsPage() {
     <div>
       <Header title={t.transactions.title} />
 
-      <div className="p-6 space-y-6">
+      <div className="p-4 md:p-6 space-y-4 md:space-y-6">
         {/* Summary */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="card flex items-center gap-4">
@@ -131,14 +131,15 @@ export default function TransactionsPage() {
 
         {/* Table */}
         <div className="card">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <div className="relative">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="relative flex-1 sm:flex-none">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder={t.transactions.search}
+                  className="w-full sm:w-auto"
                   style={{ paddingLeft: '36px', paddingRight: '12px', paddingTop: '8px', paddingBottom: '8px', fontSize: '13px', border: '1.5px solid #ede9e3', borderRadius: '10px', outline: 'none', background: '#f7f3ee' }}
                 />
               </div>
@@ -148,7 +149,7 @@ export default function TransactionsPage() {
                     key={f}
                     onClick={() => setFilter(f)}
                     style={{
-                      padding: '6px 12px',
+                      padding: '6px 10px',
                       fontSize: '12px',
                       fontWeight: 600,
                       background: filter === f ? '#ff6b35' : 'transparent',
@@ -162,7 +163,7 @@ export default function TransactionsPage() {
                 ))}
               </div>
             </div>
-            <button onClick={() => setShowModal(true)} className="btn-primary flex items-center gap-2 text-sm">
+            <button onClick={() => setShowModal(true)} className="btn-primary flex items-center justify-center gap-2 text-sm">
               <Plus className="w-4 h-4" />
               {t.transactions.newTransaction}
             </button>
@@ -178,58 +179,87 @@ export default function TransactionsPage() {
               </button>
             </div>
           ) : (
-            <table className="w-full">
-              <thead>
-                <tr className="text-left border-b border-gray-100">
-                  <th className="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">{t.transactions.description}</th>
-                  <th className="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">{t.transactions.category}</th>
-                  <th className="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">{t.transactions.date}</th>
-                  <th className="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wide text-right">{t.transactions.amount}</th>
-                  <th className="pb-3 w-8" />
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-50">
+            <>
+              {/* Desktop table */}
+              <table className="w-full hidden sm:table">
+                <thead>
+                  <tr className="text-left border-b border-gray-100">
+                    <th className="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">{t.transactions.description}</th>
+                    <th className="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">{t.transactions.category}</th>
+                    <th className="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">{t.transactions.date}</th>
+                    <th className="pb-3 text-xs font-semibold text-gray-400 uppercase tracking-wide text-right">{t.transactions.amount}</th>
+                    <th className="pb-3 w-8" />
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {filtered.map((tx) => {
+                    const cat = getCategoryInfo(tx.category)
+                    return (
+                      <tr key={tx.id} className="hover:bg-gray-50 transition-colors group">
+                        <td className="py-3">
+                          <div className="flex items-center gap-3">
+                            <span className="text-lg">{cat.icon}</span>
+                            <span className="text-sm font-medium text-gray-800">{tx.description}</span>
+                          </div>
+                        </td>
+                        <td className="py-3">
+                          <span className="badge" style={{ backgroundColor: cat.color + '20', color: cat.color }}>
+                            {cat.label}
+                          </span>
+                        </td>
+                        <td className="py-3 text-sm text-gray-500">{formatDate(new Date(tx.date))}</td>
+                        <td className="py-3 text-right">
+                          <span className={cn('text-sm font-semibold', tx.type === 'INCOME' ? 'text-green-600' : 'text-red-500')}>
+                            {tx.type === 'INCOME' ? '+' : '-'}{formatCurrency(tx.amount)}
+                          </span>
+                        </td>
+                        <td className="py-3">
+                          <button
+                            onClick={() => handleDelete(tx.id)}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded hover:bg-red-50"
+                          >
+                            <Trash2 className="w-3.5 h-3.5 text-red-400" />
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+
+              {/* Mobile card list */}
+              <div className="sm:hidden divide-y divide-gray-50">
                 {filtered.map((tx) => {
                   const cat = getCategoryInfo(tx.category)
                   return (
-                    <tr key={tx.id} className="hover:bg-gray-50 transition-colors group">
-                      <td className="py-3">
-                        <div className="flex items-center gap-3">
-                          <span className="text-lg">{cat.icon}</span>
-                          <span className="text-sm font-medium text-gray-800">{tx.description}</span>
-                        </div>
-                      </td>
-                      <td className="py-3">
-                        <span className="badge" style={{ backgroundColor: cat.color + '20', color: cat.color }}>
-                          {cat.label}
-                        </span>
-                      </td>
-                      <td className="py-3 text-sm text-gray-500">{formatDate(new Date(tx.date))}</td>
-                      <td className="py-3 text-right">
-                        <span className={cn('text-sm font-semibold', tx.type === 'INCOME' ? 'text-green-600' : 'text-red-500')}>
+                    <div key={tx.id} className="py-3 flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: cat.color + '20' }}>
+                        <span className="text-base">{cat.icon}</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-gray-800 truncate">{tx.description}</p>
+                        <p className="text-xs text-gray-400">{formatDate(new Date(tx.date))}</p>
+                      </div>
+                      <div className="text-right flex-shrink-0">
+                        <p className={cn('text-sm font-bold', tx.type === 'INCOME' ? 'text-green-600' : 'text-red-500')}>
                           {tx.type === 'INCOME' ? '+' : '-'}{formatCurrency(tx.amount)}
-                        </span>
-                      </td>
-                      <td className="py-3">
-                        <button
-                          onClick={() => handleDelete(tx.id)}
-                          className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded hover:bg-red-50"
-                        >
-                          <Trash2 className="w-3.5 h-3.5 text-red-400" />
+                        </p>
+                        <button onClick={() => handleDelete(tx.id)} className="mt-0.5 p-1 rounded hover:bg-red-50">
+                          <Trash2 className="w-3 h-3 text-red-300" />
                         </button>
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                   )
                 })}
-              </tbody>
-            </table>
+              </div>
+            </>
           )}
         </div>
       </div>
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/40 flex items-end sm:items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl">
             <h2 className="text-lg font-bold mb-4" style={{ color: '#1a1a2e' }}>{t.transactions.newTransaction}</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
